@@ -8,13 +8,13 @@ public class map : Node2D
     private Vector2 _current;
     private TileMap _terrain;
     private Dictionary<string, int> _terrainValues = new Dictionary<string, int>();
-    private int _movement;
+    private List<int> _movement = new List<int>();
+    private List<Vector2> _moves = new List<Vector2>();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _mousePressed = false;
-        _movement = 0;
         _terrain = GetNode<TileMap>("terrain");
         _terrainValues.Add("grass", 20);
         _terrainValues.Add("straight", 10);
@@ -61,8 +61,38 @@ public class map : Node2D
             int id = _terrain.GetCellv(_current);
             string tileType = _terrain.TileSet.TileGetName(id);
             int tileValue = _terrainValues[tileType.Left(tileType.Find("_"))];
-            GD.Print(tileValue);
+            _movement.Add(tileValue);
+            _moves.Add(_current);
+            // GD.Print(CalculateMovement());
+            GD.Print(_moves.Count);
+            if (_moves.Count > 1)
+            {
+                GD.Print(true);
+            }
+            else
+            {
+                GD.Print(false);
+            }
+
         }
+        // if (_moves.Count > 1 && _current == _moves[_moves.Count - 1])
+        if (tile != _current && _moves.Count > 1)
+        {
+            // _moves.RemoveRange(_moves.Count - 1, 2);
+            // _movement.RemoveRange(_movement.Count -1, 2);
+            // GD.Print(CalculateMovement());
+            GD.Print(_moves[_moves.Count -1 ]);
+        }
+    }
+
+    private int CalculateMovement()
+    {
+        int total = 0;
+        foreach (int s in _movement)
+        {
+            total += s;
+        }
+        return total;
     }
 
 }
