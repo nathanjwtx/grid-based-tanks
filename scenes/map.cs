@@ -39,13 +39,13 @@ public class map : Node2D
             if (@event.IsPressed())
             {
                 _mousePressed = true;
-                GD.Print(true);
+                // GD.Print(true);
                 GetTiles();
             }
             else
             {
                 _mousePressed = false;
-                GD.Print(false);
+                // GD.Print(false);
             }
         }
     }
@@ -65,19 +65,19 @@ public class map : Node2D
             // GD.Print(_moves.IndexOf(_current));
             if (_moves.IndexOf(_current) > -1)
             {
-                GD.Print("match");
+                // GD.Print("match");
                 _moves.RemoveAt(_moves.Count - 1);
                 _movement.RemoveAt(_movement.Count - 1);
             }
             else
             {
-                GD.Print("no match");
+                // GD.Print("no match");
                 _moves.Add(_current);
                 _movement.Add(tileValue);
             }
             foreach (Vector2 v in _moves)
             {
-                GD.Print(v);
+                // GD.Print(v);
             }
             GD.Print(CalculateMovement());
         }
