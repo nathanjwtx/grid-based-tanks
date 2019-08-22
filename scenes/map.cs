@@ -61,27 +61,25 @@ public class map : Node2D
             int id = _terrain.GetCellv(_current);
             string tileType = _terrain.TileSet.TileGetName(id);
             int tileValue = _terrainValues[tileType.Left(tileType.Find("_"))];
-            _movement.Add(tileValue);
-            _moves.Add(_current);
             // GD.Print(CalculateMovement());
-            GD.Print(_moves.Count);
-            if (_moves.Count > 1)
+            // GD.Print(_moves.IndexOf(_current));
+            if (_moves.IndexOf(_current) > -1)
             {
-                GD.Print(true);
+                GD.Print("match");
+                _moves.RemoveAt(_moves.Count - 1);
+                _movement.RemoveAt(_movement.Count - 1);
             }
             else
             {
-                GD.Print(false);
+                GD.Print("no match");
+                _moves.Add(_current);
+                _movement.Add(tileValue);
             }
-
-        }
-        // if (_moves.Count > 1 && _current == _moves[_moves.Count - 1])
-        if (tile != _current && _moves.Count > 1)
-        {
-            // _moves.RemoveRange(_moves.Count - 1, 2);
-            // _movement.RemoveRange(_movement.Count -1, 2);
-            // GD.Print(CalculateMovement());
-            GD.Print(_moves[_moves.Count -1 ]);
+            foreach (Vector2 v in _moves)
+            {
+                GD.Print(v);
+            }
+            GD.Print(CalculateMovement());
         }
     }
 
