@@ -28,7 +28,7 @@ public class map : Node2D
     {
         if (_mousePressed)
         {
-            GetTiles();
+            // GetTiles();
         }
     }
 
@@ -40,7 +40,7 @@ public class map : Node2D
             {
                 _mousePressed = true;
                 // GD.Print(true);
-                GetTiles();
+                // GetTiles();
             }
             else
             {
@@ -79,7 +79,7 @@ public class map : Node2D
             {
                 // GD.Print(v);
             }
-            GD.Print(CalculateMovement());
+            // GD.Print(CalculateMovement());
         }
     }
 
