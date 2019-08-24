@@ -8,6 +8,7 @@ public class Player : Node2D
     // private int a = 2;
     // private string b = "text";
     private bool _mousePressed = false;
+    private bool _playerMoved = false;
     private Vector2 _current;
     private TileMap _terrain;
     private Dictionary<string, int> _terrainValues = new Dictionary<string, int>();
@@ -29,7 +30,7 @@ public class Player : Node2D
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (_mousePressed)
+        if (_mousePressed && !_playerMoved)
         {
             MoveTank();
         }
@@ -47,6 +48,7 @@ public class Player : Node2D
             else
             {
                 _mousePressed = false;
+                _playerMoved = true;
             }
         }
     }
@@ -88,12 +90,22 @@ public class Player : Node2D
                 float priorX = _moves[_moves.Count - 2].x;
                 float priorY = _moves[_moves.Count- 2].y;
                 // GD.Print($"Count: {_moves.Count}");
-                // GD.Print($"Prev: {_moves[_moves.Count - 2]}");
-                if (priorX - _current.x == 1)
+                if (_current.x > priorX)
                 {
                     this.SetRotationDegrees((float)-90.0);
                 }
-                // else if (
+                else if (_current.x < priorX)
+                {
+                    this.SetRotationDegrees((float)90);
+                }
+                else if (_current.y > priorY)
+                {
+                    this.SetRotationDegrees((float)0);
+                }
+                else if (_current.y < priorY)
+                {
+                    this.SetRotationDegrees((float)180);
+                }
             }
 
             foreach (Vector2 v in _moves)
