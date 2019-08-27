@@ -29,6 +29,8 @@ left_mouse={
 [layer_names]
 
 2d_render/layer_1="terrain"
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
 
 [rendering]
 

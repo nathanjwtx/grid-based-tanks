@@ -19,7 +19,8 @@ public class Player : Node2D
     public override void _Ready()
     {
         _mousePressed = false;
-        _terrain = GetParent().GetNode<TileMap>("terrain");
+        // fix below to remove multiple GetParent calls
+        _terrain = GetParent().GetParent().GetNode<TileMap>("terrain");
         _terrainValues.Add("grass", 20);
         _terrainValues.Add("straight", 10);
         _terrainValues.Add("bend", 10);
