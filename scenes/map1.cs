@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class map : Node2D
+public class map1 : Node2D
 {
     private bool _mousePressed;
     private Vector2 _current;
