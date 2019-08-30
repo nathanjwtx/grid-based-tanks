@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Player : Node2D
 {
     private bool _dragged = false;
+    private Vector2 _current;
     public override void _Ready()
     {
         GD.Print(this.GetPosition());
@@ -35,13 +36,20 @@ public class Player : Node2D
         {
             if (_dragged)
             {
-                this.Position = mouseMoved.GetPosition();
+                MoveTank(mouseMoved.GetPosition());
             }   
         }
     }
 
-    private void SelectedTank()
+    private void MoveTank(Vector2 mousePos)
     {
-        
+        Vector2 tile = new Vector2((float)(Math.Floor(mousePos.x / 64)), 
+            (float)(Math.Floor(mousePos.y / 64)));
+        if (tile != _current)
+        {
+            _current = tile;
+            this.Position = new Vector2(32 + _current.x * 64, 32 + _current.y * 64);
+            
+        }
     }
 }
