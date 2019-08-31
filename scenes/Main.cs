@@ -44,7 +44,7 @@ public class Main : Node
             {
                 Vector2 mp = GetViewport().GetMousePosition();
                 Vector2 tile = new Vector2((float)(Math.Floor(mp.x / 64)), (float)(Math.Floor(mp.y / 64)));
-                GD.Print(tile);
+                // GD.Print(tile);
             }
         }
     }

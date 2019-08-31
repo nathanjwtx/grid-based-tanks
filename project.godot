@@ -32,6 +32,10 @@ left_mouse={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
 
+[mono]
+
+debugger_agent/wait_timeout=12000
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
