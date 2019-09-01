@@ -50,12 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="scenes\EnemyMain.cs" />
-    <Compile Include="scenes\EnemyUnit1.cs" />
-    <Compile Include="scenes\EnemyUnit2.cs" />
+    <Compile Include="scenes\units\EnemyUnit1.cs" />
     <Compile Include="scenes\Main.cs" />
-    <Compile Include="scenes\map1.cs" />
-    <Compile Include="scenes\Player.cs" />
+    <Compile Include="scenes\maps\map1.cs" />
+    <Compile Include="scenes\units\EnemyMain.cs" />
+    <Compile Include="scenes\units\EnemyUnit2.cs" />
+    <Compile Include="scenes\units\Player.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

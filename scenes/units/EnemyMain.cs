@@ -28,5 +28,7 @@ public class EnemyMain : KinematicBody2D
     {
         GD.Print("called");
         _follow = pathFollow2D;
+        _follow.Loop = true;
+        _follow.Rotate = true;
     }
 }

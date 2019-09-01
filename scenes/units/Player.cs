@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class Player : Node2D
+public class Player : KinematicBody2D
 {
     private bool _dragged = false;
     private Vector2 _current;

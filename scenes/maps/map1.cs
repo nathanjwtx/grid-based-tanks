@@ -21,14 +21,12 @@ public class map1 : Node2D
         _terrainValues.Add("bend", 10);
         _terrainValues.Add("cross", 10);
         _terrainValues.Add("tee", 10);
-        PackedScene enemy = (PackedScene) ResourceLoader.Load("res://scenes/EnemyUnit2.tscn");
+        PackedScene enemy = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit2.tscn");
         EnemyUnit2 enemyUnit2 = (EnemyUnit2) enemy.Instance();
         enemyUnit2.Visible = true;
         enemyUnit2.Speed = 50;
         PathFollow2D pathFollow2D = GetNode<PathFollow2D>("Path2D/PathFollow2D");
         pathFollow2D.AddChild(enemyUnit2);
-        // pathFollow2D.Loop = true;
-        // pathFollow2D.Rotate = true;
         enemyUnit2.Call("Movement", pathFollow2D);
     }
 
