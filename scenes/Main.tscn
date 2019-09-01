@@ -20,4 +20,3 @@ position = Vector2( 32, 96 )
 "playerUnits",
 ] instance=ExtResource( 3 )]
 position = Vector2( 160, 224 )
-
