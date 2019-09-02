@@ -9,44 +9,13 @@ public class EnemyUnit2 : EnemyMain
     // private string b = "text";
     private PathFollow2D _follow;
     private Path2D _path;
-    private RayCast2D _collision;
     private RayCast2D _inRange;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        // _path = GetParent().GetNode<Path2D>("Path2D");
-        // _follow = GetParent().GetNode<PathFollow2D>("Path2D/PathFollow2D");
-        // _follow.Loop = true;
-        // _follow.Rotate = true;
-        // Movement(_follow);
-        _collision = GetNode<RayCast2D>("RayCast2D");
+        base._collision = GetNode<RayCast2D>("Ray_Collision");
         Speed = 50;
-    }
-
-
-    public void Colliding()
-    {
-        var spaceState = GetWorld2d().DirectSpaceState;
-        var result = spaceState.IntersectRay(GlobalPosition, new Vector2(GlobalPosition.x + _collision.CastTo.x, GlobalPosition.y), new Godot.Collections.Array {this}, CollisionMask);
-        if (result.Count > 0)
-        {
-            if (result["collider"].ToString() == "Player")
-            {
-                Speed = 0;
-            }
-        }
-        // if (_collision.IsColliding())
-        // {
-        //     if (_collision.GetCollider() is Player)
-        //     {
-        //         Speed = 0;
-        //     }
-        // }
-        else
-        {
-            Speed = 50;
-        }
     }
 
 

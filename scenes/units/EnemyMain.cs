@@ -3,12 +3,13 @@ using System;
 
 public class EnemyMain : KinematicBody2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+
     [Export] public int Speed;
 
     private PathFollow2D _follow;
+
+    // _collision set from EnemyUnit
+    public RayCast2D _collision;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -30,5 +31,25 @@ public class EnemyMain : KinematicBody2D
         _follow = pathFollow2D;
         _follow.Loop = true;
         _follow.Rotate = true;
+    }
+
+    public void Colliding()
+    {
+        var spaceState = GetWorld2d().DirectSpaceState;
+        var result = spaceState.IntersectRay(GlobalPosition,
+                                             new Vector2(GlobalPosition.x + _collision.CastTo.x, GlobalPosition.y),
+                                             new Godot.Collections.Array { this },
+                                             CollisionMask);
+        if (result.Count > 0)
+        {
+            if (result["collider"].ToString() == "Player")
+            {
+                Speed = 0;
+            }
+        }
+        else
+        {
+            Speed = 50;
+        }
     }
 }
