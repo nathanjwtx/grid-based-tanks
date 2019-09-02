@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public class EnemyUnit2 : EnemyMain
@@ -20,29 +21,38 @@ public class EnemyUnit2 : EnemyMain
         // _follow.Rotate = true;
         // Movement(_follow);
         _collision = GetNode<RayCast2D>("RayCast2D");
-        // Speed = 50;
+        Speed = 50;
     }
 
 
     public void Colliding()
     {
-        if (_collision.IsColliding())
+        var spaceState = GetWorld2d().DirectSpaceState;
+        var result = spaceState.IntersectRay(GlobalPosition, new Vector2(GlobalPosition.x + 64, GlobalPosition.y), new Godot.Collections.Array {this}, CollisionMask);
+        if (result.Count > 0)
         {
-            if (_collision.GetCollider() is Player)
+            if (result["collider"].ToString() == "Player")
             {
                 Speed = 0;
             }
         }
-        else
-        {
-            Speed = 50;
-        }
+        // if (_collision.IsColliding())
+        // {
+        //     if (_collision.GetCollider() is Player)
+        //     {
+        //         Speed = 0;
+        //     }
+        // }
+        // else
+        // {
+            // Speed = 50;
+        // }
     }
 
 
     private void _on_Radar2_body_entered(object body)
     {
-        Speed = 0;
+        // Speed = 0;
         GD.Print("player");
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
