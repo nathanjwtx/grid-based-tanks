@@ -12,7 +12,6 @@ extents = Vector2( 64, 64 )
 
 [node name="EnemyUnit2" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-Speed = 50
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
 collision_layer = 2

@@ -19,6 +19,7 @@ public class EnemyUnit2 : EnemyMain
         // _follow.Rotate = true;
         // Movement(_follow);
         _rayCast2D = GetNode<RayCast2D>("RayCast2D");
+        // Speed = 50;
     }
 
 
@@ -28,8 +29,12 @@ public class EnemyUnit2 : EnemyMain
         {
             if (_rayCast2D.GetCollider() is Player)
             {
-                GD.Print("Player");
+                Speed = 0;
             }
+        }
+        else
+        {
+            Speed = 50;
         }
     }
 
