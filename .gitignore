@@ -1,3 +1,5 @@
 */*.png.import
 \.mono/
 \.import/
+.idea/
+mono_crash*

@@ -2,9 +2,15 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class map : Node2D
+public class Player_XXX: Node2D
 {
-    private bool _mousePressed;
+    private bool _canSelect;
+
+    // Declare member variables here. Examples:
+    // private int a = 2;
+    // private string b = "text";
+    private bool _mousePressed = false;
+    private bool _playerMoved = false;
     private Vector2 _current;
     private TileMap _terrain;
     private Dictionary<string, int> _terrainValues = new Dictionary<string, int>();
@@ -14,8 +20,10 @@ public class map : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _canSelect = false;
         _mousePressed = false;
-        _terrain = GetNode<TileMap>("terrain");
+        // fix below to remove multiple GetParent calls
+        _terrain = GetParent().GetParent().GetNode<TileMap>("terrain");
         _terrainValues.Add("grass", 20);
         _terrainValues.Add("straight", 10);
         _terrainValues.Add("bend", 10);
@@ -26,9 +34,9 @@ public class map : Node2D
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (_mousePressed)
+        if (_mousePressed && !_playerMoved)
         {
-            // GetTiles();
+            MoveTank();
         }
     }
 
@@ -39,30 +47,35 @@ public class map : Node2D
             if (@event.IsPressed())
             {
                 _mousePressed = true;
-                // GD.Print(true);
-                // GetTiles();
+                MoveTank();
             }
             else
             {
                 _mousePressed = false;
-                // GD.Print(false);
+                _playerMoved = true;
             }
         }
     }
 
-    private void GetTiles()
+    public void MoveTank()
     {
         Vector2 mp = GetViewport().GetMousePosition();
-        Vector2 tile = new Vector2((float)(Math.Floor(mp.x / 64)), (float)Math.Floor(mp.y / 64));
+        Vector2 tile = new Vector2((float)(Math.Floor(mp.x / 64)),
+            (float)(Math.Floor(mp.y / 64)));
+        if (_moves.Count == 0)
+        {
+            _moves.Add(_current);
+        }
         if (tile != _current)
         {
             _current = tile;
-            // GD.Print(_current);
+            // GD.Print(this.GetGlobalPosition());
+            this.Position = new Vector2(32 + _current.x * 64, 32 + _current.y * 64);
             int id = _terrain.GetCellv(_current);
             string tileType = _terrain.TileSet.TileGetName(id);
             int tileValue = _terrainValues[tileType.Left(tileType.Find("_"))];
-            // GD.Print(CalculateMovement());
-            // GD.Print(_moves.IndexOf(_current));
+            
+            
             if (_moves.IndexOf(_current) > -1)
             {
                 // GD.Print("match");
@@ -75,11 +88,34 @@ public class map : Node2D
                 _moves.Add(_current);
                 _movement.Add(tileValue);
             }
+
+            if (_moves.Count > 0)
+            {
+                float priorX = _moves[_moves.Count - 2].x;
+                float priorY = _moves[_moves.Count- 2].y;
+                // GD.Print($"Count: {_moves.Count}");
+                if (_current.x > priorX)
+                {
+                    this.SetRotationDegrees((float)-90.0);
+                }
+                else if (_current.x < priorX)
+                {
+                    this.SetRotationDegrees((float)90);
+                }
+                else if (_current.y > priorY)
+                {
+                    this.SetRotationDegrees((float)0);
+                }
+                else if (_current.y < priorY)
+                {
+                    this.SetRotationDegrees((float)180);
+                }
+            }
+
             foreach (Vector2 v in _moves)
             {
-                // GD.Print(v);
+                GD.Print(v);
             }
-            // GD.Print(CalculateMovement());
         }
     }
 
@@ -92,5 +128,4 @@ public class map : Node2D
         }
         return total;
     }
-
 }

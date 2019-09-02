@@ -2,38 +2,46 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class Player : Node2D
+public class map1 : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-    private bool _mousePressed = false;
-    private bool _playerMoved = false;
+    private bool _mousePressed;
     private Vector2 _current;
     private TileMap _terrain;
     private Dictionary<string, int> _terrainValues = new Dictionary<string, int>();
     private List<int> _movement = new List<int>();
     private List<Vector2> _moves = new List<Vector2>();
+    private EnemyUnit2 _enemyUnit2;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _mousePressed = false;
-        // fix below to remove multiple GetParent calls
-        _terrain = GetParent().GetParent().GetNode<TileMap>("terrain");
+        _terrain = GetNode<TileMap>("terrain");
         _terrainValues.Add("grass", 20);
         _terrainValues.Add("straight", 10);
         _terrainValues.Add("bend", 10);
         _terrainValues.Add("cross", 10);
         _terrainValues.Add("tee", 10);
+        PackedScene enemy = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit2.tscn");
+        _enemyUnit2 = (EnemyUnit2) enemy.Instance();
+        _enemyUnit2.Visible = true;
+        // _enemyUnit2.Speed = 50;
+        PathFollow2D pathFollow2D = GetNode<PathFollow2D>("Path2D/PathFollow2D");
+        pathFollow2D.AddChild(_enemyUnit2);
+        _enemyUnit2.Call("Movement", pathFollow2D);
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        _enemyUnit2.Colliding();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (_mousePressed && !_playerMoved)
+        if (_mousePressed)
         {
-            MoveTank();
+            // GetTiles();
         }
     }
 
@@ -44,35 +52,30 @@ public class Player : Node2D
             if (@event.IsPressed())
             {
                 _mousePressed = true;
-                MoveTank();
+                // GD.Print(true);
+                // GetTiles();
             }
             else
             {
                 _mousePressed = false;
-                _playerMoved = true;
+                // GD.Print(false);
             }
         }
     }
 
-    public void MoveTank()
+    private void GetTiles()
     {
         Vector2 mp = GetViewport().GetMousePosition();
-        Vector2 tile = new Vector2((float)(Math.Floor(mp.x / 64)),
-            (float)(Math.Floor(mp.y / 64)));
-        if (_moves.Count == 0)
-        {
-            _moves.Add(_current);
-        }
+        Vector2 tile = new Vector2((float)(Math.Floor(mp.x / 64)), (float)Math.Floor(mp.y / 64));
         if (tile != _current)
         {
             _current = tile;
-            // GD.Print(this.GetGlobalPosition());
-            this.Position = new Vector2(32 + _current.x * 64, 32 + _current.y * 64);
+            // GD.Print(_current);
             int id = _terrain.GetCellv(_current);
             string tileType = _terrain.TileSet.TileGetName(id);
             int tileValue = _terrainValues[tileType.Left(tileType.Find("_"))];
-            
-            
+            // GD.Print(CalculateMovement());
+            // GD.Print(_moves.IndexOf(_current));
             if (_moves.IndexOf(_current) > -1)
             {
                 // GD.Print("match");
@@ -85,34 +88,11 @@ public class Player : Node2D
                 _moves.Add(_current);
                 _movement.Add(tileValue);
             }
-
-            if (_moves.Count > 0)
-            {
-                float priorX = _moves[_moves.Count - 2].x;
-                float priorY = _moves[_moves.Count- 2].y;
-                // GD.Print($"Count: {_moves.Count}");
-                if (_current.x > priorX)
-                {
-                    this.SetRotationDegrees((float)-90.0);
-                }
-                else if (_current.x < priorX)
-                {
-                    this.SetRotationDegrees((float)90);
-                }
-                else if (_current.y > priorY)
-                {
-                    this.SetRotationDegrees((float)0);
-                }
-                else if (_current.y < priorY)
-                {
-                    this.SetRotationDegrees((float)180);
-                }
-            }
-
             foreach (Vector2 v in _moves)
             {
-                GD.Print(v);
+                // GD.Print(v);
             }
+            // GD.Print(CalculateMovement());
         }
     }
 
@@ -125,4 +105,5 @@ public class Player : Node2D
         }
         return total;
     }
+
 }
