@@ -15,7 +15,7 @@ public class EnemyMain : KinematicBody2D
     public override void _Ready()
     {
         base._Ready();
-        GD.Print(GetParent().Name);
+        // GD.Print(GetParent().Name);
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,17 +35,27 @@ public class EnemyMain : KinematicBody2D
 
     public void Colliding()
     {
-        var spaceState = GetWorld2d().DirectSpaceState;
-        var result = spaceState.IntersectRay(GlobalPosition,
-                                             new Vector2(GlobalPosition.x + _collision.CastTo.x, GlobalPosition.y),
-                                             new Godot.Collections.Array { this },
-                                             CollisionMask);
-        if (result.Count > 0)
+        // var spaceState = GetWorld2d().DirectSpaceState;
+        // var result = spaceState.IntersectRay(GlobalPosition,
+        //                                      new Vector2(GlobalPosition.x + _collision.CastTo.x, GlobalPosition.y),
+        //                                      new Godot.Collections.Array { this },
+        //                                      CollisionMask);
+        // if (result.Count > 0)
+        // {
+        //     if (result["collider"].ToString() == "Player")
+        //     {
+        //         GD.Print("Collision");
+        //         Speed = 0;
+        //     }
+        // }
+        // else
+        // {
+        //     Speed = 50;
+        // }
+        if (_collision.IsColliding())
         {
-            if (result["collider"].ToString() == "Player")
-            {
-                Speed = 0;
-            }
+            GD.Print(_collision.GetCollider());
+            Speed = 0;
         }
         else
         {

@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Square-Grid-Testing"
 config/icon="res://icon.png"
 
+[debug]
+
+shapes/collision/shape_color=Color( 0.25098, 0.701961, 0, 0.501961 )
+
 [input]
 
 left_mouse={
