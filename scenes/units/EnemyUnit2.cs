@@ -8,7 +8,8 @@ public class EnemyUnit2 : EnemyMain
     // private string b = "text";
     private PathFollow2D _follow;
     private Path2D _path;
-    private RayCast2D _rayCast2D;
+    private RayCast2D _collision;
+    private RayCast2D _inRange;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -18,16 +19,16 @@ public class EnemyUnit2 : EnemyMain
         // _follow.Loop = true;
         // _follow.Rotate = true;
         // Movement(_follow);
-        _rayCast2D = GetNode<RayCast2D>("RayCast2D");
+        _collision = GetNode<RayCast2D>("RayCast2D");
         // Speed = 50;
     }
 
 
     public void Colliding()
     {
-        if (_rayCast2D.IsColliding())
+        if (_collision.IsColliding())
         {
-            if (_rayCast2D.GetCollider() is Player)
+            if (_collision.GetCollider() is Player)
             {
                 Speed = 0;
             }
@@ -39,9 +40,16 @@ public class EnemyUnit2 : EnemyMain
     }
 
 
+    private void _on_Radar2_body_entered(object body)
+    {
+        Speed = 0;
+        GD.Print("player");
+    }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {
 //      
 //  }
 }
+
+

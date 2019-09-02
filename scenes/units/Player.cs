@@ -73,23 +73,6 @@ public class Player : KinematicBody2D
             }
             if (_moves.Count > 1)
             {
-                // if (_current.x > priorX)
-                // {
-                //     this.SetRotationDegrees((float)-90);
-                // }
-                // else if (_current.x < priorX)
-                // {
-                //     this.SetRotationDegrees((float)90);
-                // }
-                // else if (_current.y > priorY)
-                // {
-                //     this.SetRotationDegrees((float)0);
-                // }
-                // else if (_current.y < priorY)
-                // {
-                //     this.SetRotationDegrees((float)180);
-                // }
-                // GD.Print($"{_current.x - priorX}, {_current.x}, {priorX}");
                 var norm = (_current - _moves[_moves.Count - 1]).Normalized();
                 GD.Print(norm);
                 if (_current.x < priorX)
