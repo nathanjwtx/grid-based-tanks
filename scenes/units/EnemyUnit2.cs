@@ -8,6 +8,7 @@ public class EnemyUnit2 : EnemyMain
     // private string b = "text";
     private PathFollow2D _follow;
     private Path2D _path;
+    private RayCast2D _rayCast2D;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -17,6 +18,19 @@ public class EnemyUnit2 : EnemyMain
         // _follow.Loop = true;
         // _follow.Rotate = true;
         // Movement(_follow);
+        _rayCast2D = GetNode<RayCast2D>("RayCast2D");
+    }
+
+
+    public void Colliding()
+    {
+        if (_rayCast2D.IsColliding())
+        {
+            if (_rayCast2D.GetCollider() is Player)
+            {
+                GD.Print("Player");
+            }
+        }
     }
 
 

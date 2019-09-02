@@ -10,6 +10,7 @@ public class map1 : Node2D
     private Dictionary<string, int> _terrainValues = new Dictionary<string, int>();
     private List<int> _movement = new List<int>();
     private List<Vector2> _moves = new List<Vector2>();
+    private EnemyUnit2 _enemyUnit2;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -22,12 +23,17 @@ public class map1 : Node2D
         _terrainValues.Add("cross", 10);
         _terrainValues.Add("tee", 10);
         PackedScene enemy = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit2.tscn");
-        EnemyUnit2 enemyUnit2 = (EnemyUnit2) enemy.Instance();
-        enemyUnit2.Visible = true;
-        enemyUnit2.Speed = 50;
+        _enemyUnit2 = (EnemyUnit2) enemy.Instance();
+        _enemyUnit2.Visible = true;
+        _enemyUnit2.Speed = 50;
         PathFollow2D pathFollow2D = GetNode<PathFollow2D>("Path2D/PathFollow2D");
-        pathFollow2D.AddChild(enemyUnit2);
-        enemyUnit2.Call("Movement", pathFollow2D);
+        pathFollow2D.AddChild(_enemyUnit2);
+        _enemyUnit2.Call("Movement", pathFollow2D);
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        _enemyUnit2.Colliding();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -11,7 +11,6 @@ extents = Vector2( 21.3382, 23.0565 )
 extents = Vector2( 64, 64 )
 
 [node name="EnemyUnit2" instance=ExtResource( 1 )]
-collision_mask = 9
 script = ExtResource( 2 )
 Speed = 50
 
@@ -32,3 +31,8 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" index="0"]
 visible = false
 shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+enabled = true
+cast_to = Vector2( 64, 0 )
+collision_mask = 9
