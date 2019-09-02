@@ -6,7 +6,7 @@
 extents = Vector2( 27.6898, 27.8088 )
 
 [node name="GreyCrate" type="StaticBody2D"]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
