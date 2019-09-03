@@ -18,5 +18,9 @@ public class EnemyUnit1 : EnemyMain
     {
         // Speed = 0;
         // GD.Print("player");
+        if (body is Player player)
+        {
+            base._target = player;
+        }
     }
 }

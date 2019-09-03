@@ -10,27 +10,43 @@ public class EnemyMain : KinematicBody2D
 
     // _collision set from EnemyUnit
     public RayCast2D _collision;
-    
-    // Called when the node enters the scene tree for the first time.
+    public Player _target;
+    private bool targetAcquired;
+    private EnemyUnit2 _enemyUnit2;
+
     public override void _Ready()
     {
         base._Ready();
         // GD.Print(GetParent().Name);
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
         _follow.SetOffset(_follow.GetOffset() + Speed * delta);       
         Position = new Vector2();
     }
+
+    public override void _Process(float delta)
+    {
+        AimAndShoot();
+    }
+
     public void Movement(PathFollow2D pathFollow2D)
     {
         GD.Print("called");
         _follow = pathFollow2D;
         _follow.Loop = true;
         _follow.Rotate = true;
+    }
+
+    private void AimAndShoot()
+    {
+        if (_target != null & !targetAcquired)
+        {
+            GD.Print("targeted");
+            targetAcquired = true;
+        }
     }
 
     public void Colliding()

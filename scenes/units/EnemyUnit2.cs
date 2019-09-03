@@ -16,12 +16,27 @@ public class EnemyUnit2 : EnemyMain
     }
 
 
-    private void _on_Radar2_body_entered(object body)
+    private void _on_Radar_body_entered(object body)
     {
         // Speed = 0;
         // GD.Print("player");
+        GD.Print(body.ToString());
+        if (body is Player player)
+        {
+            base._target = player;
+        }
+    }
+
+    private void _on_Radar_body_exited(object body)
+    {
+        GD.Print("exit");
+        base._target = null;
     }
 
 }
+
+
+
+
 
 

@@ -57,7 +57,7 @@ format = 1
 tile_data = PoolIntArray( 196614, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 544, 32 )
+position = Vector2( 352, 288 )
 
 [node name="Path2D2" type="Path2D" parent="."]
 curve = SubResource( 3 )
