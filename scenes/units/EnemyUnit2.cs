@@ -24,6 +24,7 @@ public class EnemyUnit2 : EnemyMain
         if (body is Player player)
         {
             base._target = player;
+            barrel = GetNode<Sprite>("Barrel");
         }
     }
 

@@ -13,6 +13,7 @@ public class EnemyMain : KinematicBody2D
     public Player _target;
     private bool targetAcquired;
     private EnemyUnit2 _enemyUnit2;
+    public Sprite barrel;
 
     public override void _Ready()
     {
@@ -29,7 +30,7 @@ public class EnemyMain : KinematicBody2D
 
     public override void _Process(float delta)
     {
-        AimAndShoot();
+        AimAndShoot(delta);
     }
 
     public void Movement(PathFollow2D pathFollow2D)
@@ -40,12 +41,19 @@ public class EnemyMain : KinematicBody2D
         _follow.Rotate = true;
     }
 
-    private void AimAndShoot()
+    public void AimAndShoot(float delta)
     {
         if (_target != null & !targetAcquired)
         {
             GD.Print("targeted");
             targetAcquired = true;
+        }
+
+        if (targetAcquired & _target != null)
+        {
+            Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
+            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
+            barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 75 * delta).Angle();
         }
     }
 
