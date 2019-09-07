@@ -25,12 +25,18 @@ public class EnemyMain : KinematicBody2D
     {
         base._PhysicsProcess(delta);
         _follow.SetOffset(_follow.GetOffset() + Speed * delta);       
-        Position = new Vector2();
+        // Position = new Vector2();
     }
 
     public override void _Process(float delta)
     {
         AimAndShoot(delta);
+        if (targetAcquired & _target != null)
+        {
+            Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
+            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
+            barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 5 * delta).Angle();
+        }
     }
 
     public void Movement(PathFollow2D pathFollow2D)
@@ -49,12 +55,6 @@ public class EnemyMain : KinematicBody2D
             targetAcquired = true;
         }
 
-        if (targetAcquired & _target != null)
-        {
-            Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
-            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
-            barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 75 * delta).Angle();
-        }
     }
 
     public void Colliding()
