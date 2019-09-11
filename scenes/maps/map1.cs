@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class map1 : Node2D
+public class Map1 : MapMain
 {
     private EnemyUnit2 _enemyUnit2;
     private EnemyUnit1 _enemyUnit1;

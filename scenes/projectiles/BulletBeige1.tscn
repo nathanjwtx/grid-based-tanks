@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/projectiles/ProjectileMain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/projectiles/BulletBeige1.cs" type="Script" id=2]
+[ext_resource path="res://assets/allSprites_retina_rotated.png" type="Texture" id=3]
+
+[node name="Projectile" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+Velocity = 50
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 569, 178, 36, 16 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -18, -3, -13, -8, 17, -8, 18, -7, 18, 7, 17, 8, -12, 8, -18, 3 )
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

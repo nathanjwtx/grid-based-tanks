@@ -50,9 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="scenes\maps\MapMain.cs" />
+    <Compile Include="scenes\projectiles\BulletBeige1.cs" />
+    <Compile Include="scenes\projectiles\ProjectileMain.cs" />
     <Compile Include="scenes\units\EnemyUnit1.cs" />
     <Compile Include="scenes\Main.cs" />
-    <Compile Include="scenes\maps\map1.cs" />
+    <Compile Include="scenes\maps\Map1.cs" />
     <Compile Include="scenes\units\EnemyMain.cs" />
     <Compile Include="scenes\units\EnemyUnit2.cs" />
     <Compile Include="scenes\units\Player.cs" />
