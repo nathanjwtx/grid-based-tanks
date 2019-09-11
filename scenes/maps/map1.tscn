@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/maps/map1.cs" type="Script" id=1]
 [ext_resource path="res://assets/terrain.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/test.png" type="Texture" id=3]
 [ext_resource path="res://assets/obstacles.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/units/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/units/RadarTower.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grid"
@@ -65,3 +66,6 @@ curve = SubResource( 3 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
 position = Vector2( 416, 32 )
 rotation = 1.4124
+
+[node name="RadarTower" parent="." instance=ExtResource( 6 )]
+position = Vector2( 312, 100 )

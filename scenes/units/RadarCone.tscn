@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/RadarCone.png" type="Texture" id=1]
+
+[node name="RadarCone" type="Area2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 20, 0, 40, 0, 60, 0, 63.8712, 0.00386333, 63.9087, 8.37175, 62.8955, 14.9385, 61.0568, 21.9555, 58.918, 26.9538, 57.0793, 31.0064, 54.0398, 35.8845, 50.9628, 39.9747, 47.0603, 44.0065, 44.0584, 46.9709, 40.9439, 50.0104, 37.0132, 53.0498, 32.9231, 56.0517, 29.0206, 58.078, 25.0055, 59.9918, 22.0036, 61.08, 19.0767, 62.0181, 15.0616, 63.0312, 11.0465, 63.9693, -0.0243645, 64.0069, -0.0618877, -0.0594997, 12.7338, -0.0219765 )

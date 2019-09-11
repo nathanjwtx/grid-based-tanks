@@ -56,6 +56,7 @@
     <Compile Include="scenes\units\EnemyMain.cs" />
     <Compile Include="scenes\units\EnemyUnit2.cs" />
     <Compile Include="scenes\units\Player.cs" />
+    <Compile Include="scenes\units\RadarTower.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

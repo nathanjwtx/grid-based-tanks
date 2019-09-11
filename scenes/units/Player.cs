@@ -48,6 +48,7 @@ public class Player : KinematicBody2D
 
     private void MoveTank(Vector2 mousePos)
     {
+        // GD.Print(GetParent().GetNode<TileMap>("TileMap").WorldToMap(mousePos));
         Vector2 tile = new Vector2((float)(Math.Floor(mousePos.x / 64)) * 64 + 32,
             (float)(Math.Floor(mousePos.y / 64) * 64 + 32));
         float priorX;
