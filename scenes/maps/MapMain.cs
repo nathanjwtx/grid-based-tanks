@@ -18,4 +18,8 @@ public class MapMain : Node2D
 //  {
 //      
 //  }
+    private void _on_EnemyFiring(string message)
+    {
+        GD.Print(message);
+    }
 }

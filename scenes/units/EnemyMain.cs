@@ -6,6 +6,8 @@ public class EnemyMain : KinematicBody2D
 
     [Export] public int Speed;
 
+    [Signal] delegate void Shoot();
+    
     private PathFollow2D _follow;
 
     // _collision set from EnemyUnit
@@ -53,6 +55,7 @@ public class EnemyMain : KinematicBody2D
         {
             GD.Print("targeted");
             targetAcquired = true;
+            EmitSignal("EnemyFiring", "boom boom");
         }
 
     }
