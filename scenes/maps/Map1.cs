@@ -18,6 +18,7 @@ public class Map1 : MapMain
         PathFollow2D pathFollow2D = GetNode<PathFollow2D>("Path2D/PathFollow2D");
         pathFollow2D.AddChild(_enemyUnit2);
         _enemyUnit2.Call("Movement", pathFollow2D);
+        _enemyUnit2.Connect("Shoot", this, "_on_Shoot");
 
         // PackedScene enemy2 = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit1.tscn");
         // _enemyUnit1 = (EnemyUnit1) enemy2.Instance();
@@ -31,6 +32,11 @@ public class Map1 : MapMain
     {
         _enemyUnit2.Colliding();
         // _enemyUnit1.Colliding();
+    }
+
+    private void _on_Shoot(string message)
+    {
+        GD.Print(message);
     }
 
 }

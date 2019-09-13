@@ -6,7 +6,7 @@ public class EnemyMain : KinematicBody2D
 
     [Export] public int Speed;
 
-    [Signal] delegate void Shoot();
+    [Signal] delegate void Shoot (string message);
     
     private PathFollow2D _follow;
 
@@ -43,7 +43,7 @@ public class EnemyMain : KinematicBody2D
 
     public void Movement(PathFollow2D pathFollow2D)
     {
-        GD.Print("called");
+        // GD.Print("called");
         _follow = pathFollow2D;
         _follow.Loop = true;
         _follow.Rotate = true;
@@ -55,7 +55,8 @@ public class EnemyMain : KinematicBody2D
         {
             GD.Print("targeted");
             targetAcquired = true;
-            EmitSignal("EnemyFiring", "boom boom");
+            EmitSignal("Shoot","boom boom");
+            GD.Print("after signal");
         }
 
     }

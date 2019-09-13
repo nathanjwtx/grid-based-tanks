@@ -20,7 +20,7 @@ public class EnemyUnit2 : EnemyMain
     {
         // Speed = 0;
         // GD.Print("player");
-        GD.Print(body.ToString());
+        // GD.Print(body.ToString());
         if (body is Player player)
         {
             base._target = player;
@@ -30,7 +30,7 @@ public class EnemyUnit2 : EnemyMain
 
     private void _on_Radar_body_exited(object body)
     {
-        GD.Print("exit");
+        // GD.Print("exit");
         base._target = null;
     }
 

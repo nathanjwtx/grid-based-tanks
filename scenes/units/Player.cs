@@ -75,7 +75,7 @@ public class Player : KinematicBody2D
             if (_moves.Count > 1)
             {
                 var norm = (_current - _moves[_moves.Count - 1]).Normalized();
-                GD.Print(norm);
+                // GD.Print(norm);
                 if (_current.x < priorX)
                 {
                     this.SetRotationDegrees((float) 90);
