@@ -36,6 +36,12 @@ public class EnemyBeige : EnemyMain
         base._target = null;
     }
 
+    private void _on_Shoot(string enemyPos, string message)
+    {
+        GD.Print(enemyPos);
+        GD.Print(message);
+    }
+
 }
 
 

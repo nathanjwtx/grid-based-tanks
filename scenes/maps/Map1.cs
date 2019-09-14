@@ -30,10 +30,10 @@ public class Map1 : MapMain
         // _enemyUnit1.Colliding();
     }
 
-    private void _on_Shoot(PackedScene projectile)
-    {
-        GD.Print(projectile.ResourceName);
+    // private void _on_Shoot(string message)
+    // {
+    //     GD.Print(message);
 
-    }
+    // }
 
 }
