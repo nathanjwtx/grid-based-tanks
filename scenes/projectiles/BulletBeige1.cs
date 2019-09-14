@@ -17,6 +17,11 @@ public class BulletBeige1 : ProjectileMain
     {
         GD.Print("Timer finished");
     }
+
+    public void BeigeStart(Vector2 direction, Vector2 position)
+    {
+        Start(position, direction);
+    }
 }
 
 

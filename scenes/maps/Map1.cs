@@ -4,39 +4,36 @@ using System.Collections.Generic;
 
 public class Map1 : MapMain
 {
-    private EnemyUnit2 _enemyUnit2;
     private EnemyUnit1 _enemyUnit1;
     private EnemyMain _newEnemy;
+    private PackedScene _bullet;
+    private Node _enemyPaths;
+    private EnemyBeige _enemyBeige1;
+    private PackedScene _eb1_ps;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        PackedScene enemy = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit2.tscn");
-        _enemyUnit2 = (EnemyUnit2) enemy.Instance();
-        _enemyUnit2.Visible = true;
-        CallDeferred("GetParent().AddChild", _enemyUnit2);
-        PathFollow2D pathFollow2D = GetNode<PathFollow2D>("Path2D/PathFollow2D");
-        pathFollow2D.AddChild(_enemyUnit2);
-        _enemyUnit2.Call("Movement", pathFollow2D);
-        _enemyUnit2.Connect("Shoot", this, "_on_Shoot");
+        _eb1_ps = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyBeige.tscn");
+        _enemyBeige1 = (EnemyBeige) _eb1_ps.Instance();
+        _enemyPaths = GetNode<Node>("EnemyPaths");
+        PathFollow2D enemyBeige1_pf = _enemyPaths.GetNode<PathFollow2D>("eb1_path/eb1_pf2D");
+        enemyBeige1_pf.AddChild(_enemyBeige1);
+        _enemyBeige1.Call("Movement", enemyBeige1_pf);
+        _enemyBeige1.Connect("Shoot", this, "_on_Shoot");
 
-        // PackedScene enemy2 = (PackedScene) ResourceLoader.Load("res://scenes/units/EnemyUnit1.tscn");
-        // _enemyUnit1 = (EnemyUnit1) enemy2.Instance();
-        // _enemyUnit1.Visible = true;
-        // PathFollow2D pathFollow2D1 = GetNode<PathFollow2D>("Path2D2/PathFollow2D");
-        // pathFollow2D1.AddChild(_enemyUnit1);
-        // _enemyUnit1.Call("Movement", pathFollow2D1);
+        _enemyBeige1.AddToGroup("enemyUnits");
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        _enemyUnit2.Colliding();
         // _enemyUnit1.Colliding();
     }
 
-    private void _on_Shoot(string message)
+    private void _on_Shoot(PackedScene projectile)
     {
-        GD.Print(message);
+        GD.Print(projectile.ResourceName);
+
     }
 
 }

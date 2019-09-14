@@ -23,5 +23,13 @@ public class ProjectileMain : Area2D
         this.Position += _velocity * delta;
     }
 
+    public void Start(Vector2 position, Vector2 direction)
+    {
+        Position = position;
+        Rotation = direction.Angle();
+
+        _velocity = direction * Speed;
+    }
+
 
 }

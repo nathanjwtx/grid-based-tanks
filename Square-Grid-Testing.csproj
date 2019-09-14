@@ -57,7 +57,7 @@
     <Compile Include="scenes\Main.cs" />
     <Compile Include="scenes\maps\Map1.cs" />
     <Compile Include="scenes\units\EnemyMain.cs" />
-    <Compile Include="scenes\units\EnemyUnit2.cs" />
+    <Compile Include="scenes\units\EnemyBeige.cs" />
     <Compile Include="scenes\units\Player.cs" />
     <Compile Include="scenes\units\RadarTower.cs" />
   </ItemGroup>

@@ -2,8 +2,9 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public class EnemyUnit2 : EnemyMain
+public class EnemyBeige : EnemyMain
 {
+    [Export] public PackedScene Bullet;
     private PathFollow2D _follow;
     private Path2D _path;
     private RayCast2D _inRange;
@@ -24,6 +25,7 @@ public class EnemyUnit2 : EnemyMain
         if (body is Player player)
         {
             base._target = player;
+            base.Projectile = Bullet;
             barrel = GetNode<Sprite>("Barrel");
         }
     }

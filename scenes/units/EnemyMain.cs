@@ -14,8 +14,8 @@ public class EnemyMain : KinematicBody2D
     public RayCast2D _collision;
     public Player _target;
     private bool targetAcquired;
-    private EnemyUnit2 _enemyUnit2;
     public Sprite barrel;
+    public PackedScene Projectile;
 
     public override void _Ready()
     {
@@ -55,7 +55,7 @@ public class EnemyMain : KinematicBody2D
         {
             GD.Print("targeted");
             targetAcquired = true;
-            EmitSignal("Shoot","boom boom");
+            EmitSignal("Shoot", Projectile.Instance());
             GD.Print("after signal");
         }
 
