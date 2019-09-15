@@ -18,8 +18,15 @@ public class MapMain : Node2D
 //  {
 //      
 //  }
-    private void _on_Shoot(string message)
+    // private void _on_Shoot(string message, string bullet)
+    // {
+    //     GD.Print(message);
+    public void _on_Shoot(int BulletSpeed, Player target)
     {
-        GD.Print(message);
+        GD.Print();
+        var b = new ProjectileMain("Beige", BulletSpeed);
+        GD.Print(b.ProjType);
+        Shooting(b);
+        b.Start(GetNode<Position2D>("Barrel/BulletStart").GlobalPosition, _target.GlobalPosition - GlobalPosition);
     }
 }

@@ -5,10 +5,11 @@ public class EnemyMain : KinematicBody2D
 {
 
     [Export] public int Speed;
+    [Export] public int BulletSpeed;
 
-    [Signal] delegate void Shoot (string one, string two);
+    [Signal] delegate void Shoot ();
     
-    private PathFollow2D _follow;
+    public PathFollow2D _follow;
 
     // _collision set from EnemyUnit
     public RayCast2D _collision;
@@ -32,7 +33,7 @@ public class EnemyMain : KinematicBody2D
 
     public override void _Process(float delta)
     {
-        AimAndShoot(delta);
+        Aiming(delta);
         if (targetAcquired & _target != null)
         {
             Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
@@ -49,19 +50,22 @@ public class EnemyMain : KinematicBody2D
         _follow.Rotate = true;
     }
 
-    public void AimAndShoot(float delta)
+    public void Aiming(float delta)
     {
         if (_target != null & !targetAcquired)
         {
             GD.Print("targeted");
             targetAcquired = true;
-            EmitSignal("Shoot", "hello", "Fire!");
-            // EmitSignal("Shoot", "Fire!", _target.Position);
-            GD.Print("after signal");
+            EmitSignal("Shoot", "hello", "fire!");
         }
 
     }
 
+    public void Shooting(ProjectileMain projectile)
+    {
+        projectile.Position = barrel.GetPosition();
+        // AddChild(projectile);
+    }
     public void Colliding()
     {
         // var spaceState = GetWorld2d().DirectSpaceState;

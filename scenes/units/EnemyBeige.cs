@@ -4,8 +4,8 @@ using System;
 
 public class EnemyBeige : EnemyMain
 {
-    [Export] public PackedScene Bullet;
-    private PathFollow2D _follow;
+    // [Export] public BulletBeige1 Bullet;
+    // public PathFollow2D _follow;
     private Path2D _path;
     private RayCast2D _inRange;
 
@@ -13,7 +13,8 @@ public class EnemyBeige : EnemyMain
     public override void _Ready()
     {
         base._collision = GetNode<RayCast2D>("Ray_Collision");
-        Speed = 50;
+        // Speed = 50;
+        Connect("Shoot", this, "_on_Shoot");
     }
 
 
@@ -25,7 +26,7 @@ public class EnemyBeige : EnemyMain
         if (body is Player player)
         {
             base._target = player;
-            base.Projectile = Bullet;
+            // base.Projectile = Bullet;
             barrel = GetNode<Sprite>("Barrel");
         }
     }
@@ -36,11 +37,14 @@ public class EnemyBeige : EnemyMain
         base._target = null;
     }
 
-    private void _on_Shoot(string enemyPos, string message)
-    {
-        GD.Print(enemyPos);
-        GD.Print(message);
-    }
+    // public void _on_Shoot(string enemyPos, string message)
+    // {
+    //     GD.Print();
+    //     var b = new ProjectileMain("Beige", BulletSpeed);
+    //     GD.Print(b.ProjType);
+    //     Shooting(b);
+    //     b.Start(GetNode<Position2D>("Barrel/BulletStart").GlobalPosition, _target.GlobalPosition - GlobalPosition);
+    // }
 
 }
 
