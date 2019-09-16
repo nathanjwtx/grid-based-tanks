@@ -22,9 +22,7 @@ public class MapMain : Node2D
         var projectile = (PackedScene) ResourceLoader.Load($"res://scenes/projectiles/ProjectileMain.tscn");
         var b = (ProjectileMain) projectile.Instance();
         b.Setup(bulletType, bulletSpeed);
-        // PackedScene p = (PackedScene) ResourceLoader.Load($"res://scenes/projectiles/{bulletType}.tscn");
-
-        b.Start(muzzlePos, player.GlobalPosition - GlobalPosition);
+        b.Start(muzzlePos, player.GlobalPosition - muzzlePos);
         AddChild(b);
     }
 }

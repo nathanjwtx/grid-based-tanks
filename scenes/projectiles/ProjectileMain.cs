@@ -33,7 +33,7 @@ public class ProjectileMain : Area2D
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
         this.Position += _velocity * delta;
     }
@@ -42,9 +42,9 @@ public class ProjectileMain : Area2D
     {
         GlobalPosition = position;
         Rotation = direction.Angle();
-        GD.Print(RotationDegrees);
+        // GD.Print(direction);
 
-        _velocity = new Vector2(_speed, 0).Rotated(direction.Rotated(0f).Angle());
+        _velocity = new Vector2(_speed, 0).Rotated(Rotation).Normalized() * Speed;
     }
     private void _on_AutoExplode_timeout()
     {

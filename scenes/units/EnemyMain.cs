@@ -6,6 +6,7 @@ public class EnemyMain : KinematicBody2D
 
     [Export] public int Speed;
     [Export] public int BulletSpeed;
+    [Export] public float FireTime;
 
     [Signal] delegate void Shoot ();
     
@@ -28,7 +29,7 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
-        // GD.Print(GetParent().Name);
+        // GD.Print(GlobalPosition);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -66,7 +67,10 @@ public class EnemyMain : KinematicBody2D
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
-            EmitSignal("Shoot", 100, BulletType, _target, new Vector2(GlobalPosition.x, GlobalPosition.y));
+            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+            GetNode<Timer>("FireTimer").WaitTime = FireTime;
+            GetNode<Timer>("FireTimer").Start();
+            
         }
         else if (_target is null)
         {
@@ -109,4 +113,12 @@ public class EnemyMain : KinematicBody2D
             Speed = 50;
         }
     }
+
+    private void _on_FireTimer_timeout()
+    {
+        GD.Print("Timer ended");
+        EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+    }
 }
+
+
