@@ -46,6 +46,12 @@ public class ProjectileMain : Area2D
 
         _velocity = new Vector2(_speed, 0).Rotated(direction.Rotated(0f).Angle());
     }
-
+    private void _on_AutoExplode_timeout()
+    {
+        QueueFree();
+    }
 
 }
+
+
+

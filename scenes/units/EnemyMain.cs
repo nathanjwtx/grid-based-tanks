@@ -19,16 +19,22 @@ public class EnemyMain : KinematicBody2D
     public PackedScene Projectile;
     public string BulletType;
 
+    public int TankSpeed { 
+        get; 
+        private set; 
+        }
+
     public override void _Ready()
     {
         base._Ready();
+        TankSpeed = Speed;
         // GD.Print(GetParent().Name);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-        _follow.SetOffset(_follow.GetOffset() + Speed * delta);       
+        _follow.SetOffset(_follow.GetOffset() + TankSpeed * delta);       
         // Position = new Vector2();
 
     }
@@ -40,7 +46,7 @@ public class EnemyMain : KinematicBody2D
         {
             Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
             Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
-            barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 5 * delta).Angle();
+            barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 50 * delta).Angle();
         }
     }
 
@@ -59,8 +65,12 @@ public class EnemyMain : KinematicBody2D
             GD.Print("targeted");
             targetAcquired = true;
             // stop tank whilst shooting
-            Speed = 0;
+            TankSpeed = 0;
             EmitSignal("Shoot", 100, BulletType, _target, new Vector2(GlobalPosition.x, GlobalPosition.y));
+        }
+        else if (_target is null)
+        {
+            TankSpeed = Speed;
         }
 
     }
