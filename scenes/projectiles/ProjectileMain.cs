@@ -40,8 +40,9 @@ public class ProjectileMain : Area2D
 
     public void Start(Vector2 position, Vector2 direction)
     {
-        Position = position;
+        GlobalPosition = position;
         Rotation = direction.Angle();
+        GD.Print(RotationDegrees);
 
         _velocity = new Vector2(_speed, 0).Rotated(direction.Rotated(0f).Angle());
     }

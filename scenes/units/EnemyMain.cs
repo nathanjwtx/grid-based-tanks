@@ -58,7 +58,9 @@ public class EnemyMain : KinematicBody2D
         {
             GD.Print("targeted");
             targetAcquired = true;
-            EmitSignal("Shoot", 100, BulletType, _target, new Vector2(Position.x + 50, Position.y));
+            // stop tank whilst shooting
+            Speed = 0;
+            EmitSignal("Shoot", 100, BulletType, _target, new Vector2(GlobalPosition.x, GlobalPosition.y));
         }
 
     }
