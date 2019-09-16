@@ -17,6 +17,7 @@ public class EnemyMain : KinematicBody2D
     private bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
+    public string BulletType;
 
     public override void _Ready()
     {
@@ -29,6 +30,7 @@ public class EnemyMain : KinematicBody2D
         base._PhysicsProcess(delta);
         _follow.SetOffset(_follow.GetOffset() + Speed * delta);       
         // Position = new Vector2();
+
     }
 
     public override void _Process(float delta)
@@ -56,7 +58,7 @@ public class EnemyMain : KinematicBody2D
         {
             GD.Print("targeted");
             targetAcquired = true;
-            EmitSignal("Shoot", "hello", "fire!");
+            EmitSignal("Shoot", 100, BulletType, _target, new Vector2(Position.x + 50, Position.y));
         }
 
     }

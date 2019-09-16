@@ -4,8 +4,6 @@ using System;
 
 public class EnemyBeige : EnemyMain
 {
-    // [Export] public BulletBeige1 Bullet;
-    // public PathFollow2D _follow;
     private Path2D _path;
     private RayCast2D _inRange;
 
@@ -13,20 +11,16 @@ public class EnemyBeige : EnemyMain
     public override void _Ready()
     {
         base._collision = GetNode<RayCast2D>("Ray_Collision");
-        // Speed = 50;
-        Connect("Shoot", this, "_on_Shoot");
+        GD.Print(GetParent().Name);
     }
 
 
     private void _on_Radar_body_entered(object body)
     {
-        // Speed = 0;
-        // GD.Print("player");
-        // GD.Print(body.ToString());
         if (body is Player player)
         {
             base._target = player;
-            // base.Projectile = Bullet;
+            base.BulletType = "BulletBeige1";
             barrel = GetNode<Sprite>("Barrel");
         }
     }
@@ -37,13 +31,13 @@ public class EnemyBeige : EnemyMain
         base._target = null;
     }
 
-    // public void _on_Shoot(string enemyPos, string message)
+    // public void _on_Shoot(int bulletSpeed, string message)
     // {
-    //     GD.Print();
-    //     var b = new ProjectileMain("Beige", BulletSpeed);
-    //     GD.Print(b.ProjType);
-    //     Shooting(b);
-    //     b.Start(GetNode<Position2D>("Barrel/BulletStart").GlobalPosition, _target.GlobalPosition - GlobalPosition);
+    //     GD.Print(bulletSpeed);
+    // //     var b = new ProjectileMain("Beige", BulletSpeed);
+    // //     GD.Print(b.ProjType);
+    // //     Shooting(b);
+    // //     b.Start(GetNode<Position2D>("Barrel/BulletStart").GlobalPosition, _target.GlobalPosition - GlobalPosition);
     // }
 
 }

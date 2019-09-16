@@ -21,14 +21,15 @@ public class ProjectileMain : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        // _timer = GetNode<Timer>("Lifetime");
+     
     }
 
-    public ProjectileMain(string projType, int speed)
+    public void Setup(string projType, int speed)
     {
         GD.Print("New Projectile");
         ProjType = projType;
         Speed = speed;
+        
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

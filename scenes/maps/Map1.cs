@@ -25,7 +25,7 @@ public class Map1 : MapMain
         // _enemyBeige1.AddToGroup("enemyUnits");
         _enemyUnit1 = GetNode<EnemyBeige>("EnemyPaths/eb1_path/eb1_pf2D/EnemyBeige1");
         _enemyUnit1._follow = GetNode<PathFollow2D>("EnemyPaths/eb1_path/eb1_pf2D");
-        // _enemyUnit1.Connect("Shoot", this, "_on_Shoot");
+        _enemyUnit1.Connect("Shoot", this, "_on_Shoot");
     }
 
     public override void _PhysicsProcess(float delta)
