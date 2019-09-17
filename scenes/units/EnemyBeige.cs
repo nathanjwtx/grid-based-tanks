@@ -29,6 +29,7 @@ public class EnemyBeige : EnemyMain
     {
         // GD.Print("exit");
         base._target = null;
+        base.targetAcquired = false;
     }
 
     // public void _on_Shoot(int bulletSpeed, string message)

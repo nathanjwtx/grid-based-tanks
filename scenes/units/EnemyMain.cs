@@ -15,7 +15,7 @@ public class EnemyMain : KinematicBody2D
     // _collision set from EnemyUnit
     public RayCast2D _collision;
     public Player _target;
-    private bool targetAcquired;
+    public bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
     public string BulletType;
