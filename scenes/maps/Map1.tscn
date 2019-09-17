@@ -67,6 +67,7 @@ rotation = 1.54996
 Speed = 50
 BulletSpeed = 100
 FireTime = 1.0
+Moveable = true
 
 [node name="EnemyUnits" type="Node" parent="."]
 
