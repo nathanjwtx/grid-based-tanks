@@ -18,6 +18,6 @@ public class RadarTower : StaticBody2D
     public override void _Process(float delta)
     {
         Area2D radarCone = GetNode<Area2D>("RadarCone");
-        radarCone.Rotate(delta);
+        radarCone.Rotate(0.0005f);
     }
 }
