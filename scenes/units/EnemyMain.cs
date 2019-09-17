@@ -116,8 +116,11 @@ public class EnemyMain : KinematicBody2D
 
     private void _on_FireTimer_timeout()
     {
-        GD.Print("Timer ended");
-        EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+        if (_target != null)
+        {
+            GD.Print("Timer ended");
+            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+        }
     }
 }
 
