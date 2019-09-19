@@ -7,6 +7,7 @@ public class EnemyMain : KinematicBody2D
     [Export] public int Speed;
     [Export] public int BulletSpeed;
     [Export] public float FireTime;
+    [Export] public bool Moveable;
 
     [Signal] delegate void Shoot ();
     
@@ -29,13 +30,16 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
-        // GD.Print(GlobalPosition);
+        GD.Print(Moveable);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-        _follow.SetOffset(_follow.GetOffset() + TankSpeed * delta);       
+        if (Moveable)
+        {
+            _follow.SetOffset(_follow.GetOffset() + TankSpeed * delta);       
+        }
         // Position = new Vector2();
 
     }

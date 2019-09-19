@@ -53,7 +53,7 @@
     <Compile Include="scenes\maps\MapMain.cs" />
     <Compile Include="scenes\projectiles\BulletBeige1.cs" />
     <Compile Include="scenes\projectiles\ProjectileMain.cs" />
-    <Compile Include="scenes\units\EnemyUnit1.cs" />
+    <Compile Include="scenes\units\BossTank1.cs" />
     <Compile Include="scenes\Main.cs" />
     <Compile Include="scenes\maps\Map1.cs" />
     <Compile Include="scenes\units\EnemyMain.cs" />

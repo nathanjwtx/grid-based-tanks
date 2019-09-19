@@ -26,6 +26,8 @@ public class Map1 : MapMain
         _enemyUnit1 = GetNode<EnemyBeige>("EnemyPaths/eb1_path/eb1_pf2D/EnemyBeige1");
         _enemyUnit1._follow = GetNode<PathFollow2D>("EnemyPaths/eb1_path/eb1_pf2D");
         _enemyUnit1.Connect("Shoot", this, "_on_Shoot");
+        BossTank1 bossTank1 = GetNode<BossTank1>("BossTank1");
+        bossTank1.Connect("Shoot", this, "_on_Shoot");
     }
 
     public override void _PhysicsProcess(float delta)

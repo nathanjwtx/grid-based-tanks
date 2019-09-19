@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/maps/Map1.cs" type="Script" id=1]
 [ext_resource path="res://assets/GrassTerrain.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/units/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/units/EnemyBeige.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/units/RadarTower.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/units/BossTank1.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grid"
@@ -67,8 +68,14 @@ rotation = 1.54996
 Speed = 50
 BulletSpeed = 100
 FireTime = 1.0
+Moveable = true
 
 [node name="EnemyUnits" type="Node" parent="."]
 
 [node name="RadarTower" parent="EnemyUnits" instance=ExtResource( 8 )]
 position = Vector2( 338, 225 )
+
+[node name="BossTank1" parent="." instance=ExtResource( 9 )]
+position = Vector2( 608, 480 )
+BulletSpeed = 200
+FireTime = 1.0

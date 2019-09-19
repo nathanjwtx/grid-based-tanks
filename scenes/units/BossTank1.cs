@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class EnemyUnit1 : EnemyMain
+public class BossTank1 : EnemyMain
 {
     private PathFollow2D _follow;
     private Path2D _path;
@@ -21,6 +21,17 @@ public class EnemyUnit1 : EnemyMain
         if (body is Player player)
         {
             base._target = player;
+			base.BulletType = "BulletBeige1";
+            barrel = GetNode<Sprite>("Barrel");
         }
     }
+	
+	private void _on_Radar2_body_exited(object body)
+	{
+        base._target= null;
+        base.targetAcquired = false;
+	}
 }
+
+
+
