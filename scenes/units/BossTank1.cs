@@ -21,7 +21,7 @@ public class BossTank1 : EnemyMain
         if (body is Player player)
         {
             base._target = player;
-			base.BulletType = "BulletBeige1";
+			// base.BulletType = "BulletBeige1";
             barrel = GetNode<Sprite>("Barrel");
         }
     }

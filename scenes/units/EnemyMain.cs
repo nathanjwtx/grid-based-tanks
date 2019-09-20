@@ -8,6 +8,7 @@ public class EnemyMain : KinematicBody2D
     [Export] public int BulletSpeed;
     [Export] public float FireTime;
     [Export] public bool Moveable;
+    [Export] public PackedScene BulletType;
 
     [Signal] delegate void Shoot ();
     
@@ -19,7 +20,7 @@ public class EnemyMain : KinematicBody2D
     public bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
-    public string BulletType;
+    // public string BulletType;
 
     public int TankSpeed { 
         get; 

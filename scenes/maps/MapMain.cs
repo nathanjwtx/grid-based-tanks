@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection;
 
 public class MapMain : Node2D
 {
@@ -17,12 +18,14 @@ public class MapMain : Node2D
 //  {
 //      
 //  }
-    public void _on_Shoot(int bulletSpeed, string bulletType, Player player, Vector2 muzzlePos)
+
+    public void _on_Shoot(int bulletSpeed, PackedScene bulletType, Player player, Vector2 muzzlePos)
     {
-        var projectile = (PackedScene) ResourceLoader.Load($"res://scenes/projectiles/ProjectileMain.tscn");
-        var b = (ProjectileMain) projectile.Instance();
-        b.Setup(bulletType, bulletSpeed);
-        b.Start(muzzlePos, player.GlobalPosition - muzzlePos);
-        AddChild(b);
+        PackedScene projScene = (PackedScene) ResourceLoader.Load("res://scenes/projectiles/ProjectileMain.tscn");
+
+        ProjectileMain z = (ProjectileMain) projScene.Instance();
+        z.Setup(bulletSpeed, bulletType);
+        z.Start(muzzlePos, player.GlobalPosition - muzzlePos);
+        AddChild(z);
     }
 }

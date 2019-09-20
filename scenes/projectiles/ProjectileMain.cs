@@ -4,10 +4,10 @@ using System;
 public class ProjectileMain : Area2D
 {
     private Vector2 _velocity;
-    private string _projType;
+    private PackedScene _projType;
     private int _speed;
 
-    public string ProjType
+    public PackedScene ProjType
     {
         get { return _projType; }
         private set { _projType = value; }
@@ -24,12 +24,12 @@ public class ProjectileMain : Area2D
      
     }
 
-    public void Setup(string projType, int speed)
+    public void Setup(int speed, PackedScene bulletType)
     {
         GD.Print("New Projectile");
-        ProjType = projType;
+        ProjType = bulletType;
         Speed = speed;
-        
+        AddChild(bulletType.Instance());
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
