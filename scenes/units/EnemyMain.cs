@@ -72,7 +72,7 @@ public class EnemyMain : KinematicBody2D
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
-            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GlobalPosition);
             GetNode<Timer>("FireTimer").WaitTime = FireTime;
             GetNode<Timer>("FireTimer").Start();
             
