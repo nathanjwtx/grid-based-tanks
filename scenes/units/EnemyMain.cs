@@ -68,7 +68,6 @@ public class EnemyMain : KinematicBody2D
     {
         if (_target != null & !targetAcquired)
         {
-            GD.Print("targeted");
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
@@ -123,7 +122,6 @@ public class EnemyMain : KinematicBody2D
     {
         if (_target != null)
         {
-            GD.Print("Timer ended");
             EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
         }
     }

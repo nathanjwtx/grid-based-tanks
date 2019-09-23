@@ -20,4 +20,10 @@ public class RadarTower : StaticBody2D
         Area2D radarCone = GetNode<Area2D>("RadarCone");
         radarCone.Rotate(0.0005f);
     }
+    private void _on_RadarCone_area_entered(object area)
+    {
+        GD.Print("Player spotted");
+    }
 }
+
+
