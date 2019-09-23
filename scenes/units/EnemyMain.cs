@@ -8,6 +8,7 @@ public class EnemyMain : KinematicBody2D
     [Export] public int BulletSpeed;
     [Export] public float FireTime;
     [Export] public bool Moveable;
+    [Export] public PackedScene BulletType;
 
     [Signal] delegate void Shoot ();
     
@@ -19,7 +20,7 @@ public class EnemyMain : KinematicBody2D
     public bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
-    public string BulletType;
+    // public string BulletType;
 
     public int TankSpeed { 
         get; 
@@ -71,7 +72,7 @@ public class EnemyMain : KinematicBody2D
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
-            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GlobalPosition);
             GetNode<Timer>("FireTimer").WaitTime = FireTime;
             GetNode<Timer>("FireTimer").Start();
             
