@@ -30,3 +30,4 @@ region_rect = Rect2( 936, 110, 56, 56 )
 [node name="RadarCone" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
 [connection signal="area_entered" from="RadarCone" to="." method="_on_RadarCone_area_entered"]
+[connection signal="body_entered" from="RadarCone" to="." method="_on_RadarCone_body_entered"]

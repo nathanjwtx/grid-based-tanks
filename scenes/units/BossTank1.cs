@@ -31,6 +31,11 @@ public class BossTank1 : EnemyMain
         base._target= null;
         base.targetAcquired = false;
 	}
+
+    public void _on_ReceiveTarget(string message)
+    {
+        GD.Print(message);
+    }
 }
 
 
