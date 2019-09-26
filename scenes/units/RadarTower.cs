@@ -3,6 +3,7 @@ using System;
 
 public class RadarTower : StaticBody2D
 {
+    [Signal] delegate void Target ();
     // Declare member variables here. Examples:
     // private int a = 2;
     private int _rotationSpeed;
@@ -12,6 +13,7 @@ public class RadarTower : StaticBody2D
     public override void _Ready()
     {
         _rotationSpeed = 10;
+        // Connect("ReceiveTarget", this, "_on_ReceiveTarget");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +31,7 @@ public class RadarTower : StaticBody2D
         if (body is Player p)
         {
             GD.Print(p.GetGlobalPosition());
-            EmitSignal("ReceiveTarget", "hello world");
+            EmitSignal("Target", p.GetGlobalPosition());
         }
     }
 }

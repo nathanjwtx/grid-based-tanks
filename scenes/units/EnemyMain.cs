@@ -31,7 +31,7 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
-        GD.Print(Moveable);
+        // GD.Print(Moveable);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -109,7 +109,7 @@ public class EnemyMain : KinematicBody2D
         // }
         if (_collision.IsColliding())
         {
-            GD.Print(_collision.GetCollider());
+            // GD.Print(_collision.GetCollider());
             Speed = 0;
         }
         else
