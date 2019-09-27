@@ -11,18 +11,15 @@ public class BossTank1 : EnemyMain
     {
         base._collision = GetNode<RayCast2D>("Ray_Collision");
         Speed = 30;
-        // Connect("ReceiveTarget", this, "_on_ReceiveTarget");
     }
 
 
     private void _on_Radar2_body_entered(object body)
     {
         // Speed = 0;
-        // GD.Print("player");
         if (body is Player player)
         {
             base._target = player;
-			// base.BulletType = "BulletBeige1";
             barrel = GetNode<Sprite>("Barrel");
         }
     }

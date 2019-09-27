@@ -20,7 +20,6 @@ public class EnemyMain : KinematicBody2D
     public bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
-    // public string BulletType;
 
     public int TankSpeed { 
         get; 
@@ -31,7 +30,6 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
-        // GD.Print(Moveable);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -41,7 +39,6 @@ public class EnemyMain : KinematicBody2D
         {
             _follow.SetOffset(_follow.GetOffset() + TankSpeed * delta);       
         }
-        // Position = new Vector2();
 
     }
 
@@ -58,7 +55,6 @@ public class EnemyMain : KinematicBody2D
 
     public void Movement(PathFollow2D pathFollow2D)
     {
-        // GD.Print("called");
         _follow = pathFollow2D;
         _follow.Loop = true;
         _follow.Rotate = true;
@@ -86,7 +82,6 @@ public class EnemyMain : KinematicBody2D
     public void Shooting(ProjectileMain projectile)
     {
         projectile.Position = barrel.GetPosition();
-        // AddChild(projectile);
     }
     public void Colliding()
     {
@@ -109,7 +104,6 @@ public class EnemyMain : KinematicBody2D
         // }
         if (_collision.IsColliding())
         {
-            // GD.Print(_collision.GetCollider());
             Speed = 0;
         }
         else
