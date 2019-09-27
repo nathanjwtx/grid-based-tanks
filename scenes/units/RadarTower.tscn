@@ -29,4 +29,4 @@ region_rect = Rect2( 936, 110, 56, 56 )
 
 [node name="RadarCone" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
-collision_layer = 2
+[connection signal="body_entered" from="RadarCone" to="." method="_on_RadarCone_body_entered"]

@@ -26,7 +26,7 @@ public class ProjectileMain : Area2D
 
     public void Setup(int speed, PackedScene bulletType)
     {
-        GD.Print("New Projectile");
+        // GD.Print("New Projectile");
         ProjType = bulletType;
         Speed = speed;
         AddChild(bulletType.Instance());

@@ -25,7 +25,7 @@ public class MapMain : Node2D
 
         ProjectileMain z = (ProjectileMain) projScene.Instance();
         z.Setup(bulletSpeed, bulletType);
-        z.Start(muzzlePos, player.GlobalPosition - muzzlePos);
+        z.Start(muzzlePos, player.GetGlobalPosition() - muzzlePos);
         AddChild(z);
     }
 }

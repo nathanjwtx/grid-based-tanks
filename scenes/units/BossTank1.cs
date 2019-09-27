@@ -11,6 +11,7 @@ public class BossTank1 : EnemyMain
     {
         base._collision = GetNode<RayCast2D>("Ray_Collision");
         Speed = 30;
+        // Connect("ReceiveTarget", this, "_on_ReceiveTarget");
     }
 
 
@@ -31,7 +32,9 @@ public class BossTank1 : EnemyMain
         base._target= null;
         base.targetAcquired = false;
 	}
+
+    public void _on_Target(Player player)
+    {
+        GD.Print(player.GetGlobalPosition());
+    }
 }
-
-
-

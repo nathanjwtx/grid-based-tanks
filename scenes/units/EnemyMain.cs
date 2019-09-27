@@ -31,7 +31,7 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
-        GD.Print(Moveable);
+        // GD.Print(Moveable);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -50,8 +50,8 @@ public class EnemyMain : KinematicBody2D
         Aiming(delta);
         if (targetAcquired & _target != null)
         {
-            Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
-            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
+            Vector2 targetDir = (_target.GetGlobalPosition() - GetGlobalPosition()).Normalized();
+            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GetGlobalRotation());
             barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 50 * delta).Angle();
         }
     }
@@ -68,11 +68,10 @@ public class EnemyMain : KinematicBody2D
     {
         if (_target != null & !targetAcquired)
         {
-            GD.Print("targeted");
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
-            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GetGlobalPosition());
             GetNode<Timer>("FireTimer").WaitTime = FireTime;
             GetNode<Timer>("FireTimer").Start();
             
@@ -86,7 +85,7 @@ public class EnemyMain : KinematicBody2D
 
     public void Shooting(ProjectileMain projectile)
     {
-        projectile.Position = barrel.GetPosition();
+        projectile.SetPosition(barrel.GetPosition());
         // AddChild(projectile);
     }
     public void Colliding()
@@ -110,7 +109,7 @@ public class EnemyMain : KinematicBody2D
         // }
         if (_collision.IsColliding())
         {
-            GD.Print(_collision.GetCollider());
+            // GD.Print(_collision.GetCollider());
             Speed = 0;
         }
         else
@@ -123,8 +122,7 @@ public class EnemyMain : KinematicBody2D
     {
         if (_target != null)
         {
-            GD.Print("Timer ended");
-            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", 100, BulletType, _target, GetGlobalPosition());
         }
     }
 }

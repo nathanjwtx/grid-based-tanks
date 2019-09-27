@@ -28,6 +28,11 @@ public class Map1 : MapMain
         _enemyUnit1.Connect("Shoot", this, "_on_Shoot");
         BossTank1 bossTank1 = GetNode<BossTank1>("BossTank1");
         bossTank1.Connect("Shoot", this, "_on_Shoot");
+
+
+        RadarTower radar = GetNode<RadarTower>("EnemyUnits/RadarTower");
+        radar.Connect("Target", bossTank1, "_on_Target");
+
     }
 
     public override void _PhysicsProcess(float delta)

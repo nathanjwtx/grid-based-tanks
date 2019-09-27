@@ -11,7 +11,7 @@ public class EnemyBeige : EnemyMain
     public override void _Ready()
     {
         base._collision = GetNode<RayCast2D>("Ray_Collision");
-        GD.Print(GetParent().Name);
+        // GD.Print(GetParent().Name);
     }
 
 
