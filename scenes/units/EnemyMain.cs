@@ -47,8 +47,8 @@ public class EnemyMain : KinematicBody2D
         Aiming(delta);
         if (targetAcquired & _target != null)
         {
-            Vector2 targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
-            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GlobalRotation);
+            Vector2 targetDir = (_target.GetGlobalPosition() - GetGlobalPosition()).Normalized();
+            Vector2 currentDir = new Vector2(1, 0).Rotated(barrel.GetGlobalRotation());
             barrel.GlobalRotation = currentDir.LinearInterpolate(targetDir, 50 * delta).Angle();
         }
     }
@@ -67,7 +67,7 @@ public class EnemyMain : KinematicBody2D
             targetAcquired = true;
             // stop tank whilst shooting
             TankSpeed = 0;
-            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", BulletSpeed, BulletType, _target, GetGlobalPosition());
             GetNode<Timer>("FireTimer").WaitTime = FireTime;
             GetNode<Timer>("FireTimer").Start();
             
@@ -81,7 +81,7 @@ public class EnemyMain : KinematicBody2D
 
     public void Shooting(ProjectileMain projectile)
     {
-        projectile.Position = barrel.GetPosition();
+        projectile.SetPosition(barrel.GetPosition());
     }
     public void Colliding()
     {
@@ -116,7 +116,7 @@ public class EnemyMain : KinematicBody2D
     {
         if (_target != null)
         {
-            EmitSignal("Shoot", 100, BulletType, _target, GlobalPosition);
+            EmitSignal("Shoot", 100, BulletType, _target, GetGlobalPosition());
         }
     }
 }

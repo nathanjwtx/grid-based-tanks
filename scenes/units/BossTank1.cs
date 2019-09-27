@@ -30,8 +30,8 @@ public class BossTank1 : EnemyMain
         base.targetAcquired = false;
 	}
 
-    public void _on_Target(Vector2 targetPos)
+    public void _on_Target(Player player)
     {
-        GD.Print(targetPos);
+        GD.Print(player.GetGlobalPosition());
     }
 }
