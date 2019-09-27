@@ -31,7 +31,7 @@ public class RadarTower : StaticBody2D
         if (body is Player p)
         {
             GD.Print(p.GetGlobalPosition());
-            EmitSignal("Target", p.GetGlobalPosition());
+            EmitSignal("Target", p);
         }
     }
 }
