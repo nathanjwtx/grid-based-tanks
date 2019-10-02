@@ -1,5 +1,7 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 public class BossTank1 : EnemyMain
 {
@@ -30,8 +32,15 @@ public class BossTank1 : EnemyMain
         base.targetAcquired = false;
 	}
 
-    public void _on_Target(Player player)
+    public void _on_Target(Godot.Collections.Dictionary<Player, Vector2> players)
     {
-        GD.Print(player.GetGlobalPosition());
+        // if (base._target is null)
+        // {
+            Random r = new Random();
+            List<Player> playerList = new List<Player>(players.Keys);
+            // GD.Print(players[playerList[r.Next(0, 2)]]);
+            base._target = playerList[r.Next(0, players.Count)];
+            barrel = GetNode<Sprite>("Barrel");
+        // }
     }
 }
