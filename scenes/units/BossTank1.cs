@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using GC = Godot.Collections;
 using System;
 using System.Collections.Generic;
 
@@ -32,21 +32,30 @@ public class BossTank1 : EnemyMain
         base.targetAcquired = false;
 	}
 
-    public void _on_Target(List<Player> players)
+    public void _on_Target(GC.Array players)
     {
         // if (base._target is null)
         // {
             // Random r = new Random();
-            List<Player> playerList = new List<Player>(players.Keys);
             // // GD.Print(players[playerList[r.Next(0, 2)]]);
             // base._target = playerList[r.Next(0, players.Count)];
             // barrel = GetNode<Sprite>("Barrel");
         // }
         Player closest;
         List<float> Distances = new List<float>();
-        foreach (Player p in playerList)
+        float distance = -1.0f;
+        Dictionary<Player, float> PlayerDistances = new Dictionary<Player, float>();
+        foreach (Player p in players)
         {
-            Distances.Add(GetGlobalPosition().DistanceSquaredTo(p.GetGlobalPosition()));
+            float d = GetGlobalPosition().DistanceSquaredTo(p.GetGlobalPosition());
+            PlayerDistances.Add(p, d);
+            if (d > distance)
+            {
+                closest = p;
+                distance = d;
+                base._target = p;
+                barrel = GetNode<Sprite>("Barrel");
+            }
         }
         Distances.Sort();
 

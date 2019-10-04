@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using GC = Godot.Collections;
 using System;
 using System.Collections.Generic;
 
@@ -8,14 +8,14 @@ public class RadarTower : StaticBody2D
     [Signal] delegate void Target ();
     [Export] public float RotationSpeed;
 
-    private List<Player> Enemies;
+    private GC.Array Enemies;
     private float _rotationSpeed;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _rotationSpeed = RotationSpeed;
-        EnemyRange = new List<Player>();
+        Enemies = new GC.Array();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,15 +32,11 @@ public class RadarTower : StaticBody2D
     {
         if (body is Player p)
         {
-            if (EnemyRange.ContainsKey(p))
+            if (!Enemies.Contains(p))
             {
-                EnemyRange[p] = p.GetGlobalPosition();
+                Enemies.Add(p);
             }
-            else
-            {
-                EnemyRange.Add(p, p.GetGlobalPosition());
-            }
-            EmitSignal("Target", EnemyRange);
+            EmitSignal("Target", Enemies);
         }
     }
 }

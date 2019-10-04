@@ -78,7 +78,7 @@ BulletType = ExtResource( 8 )
 
 [node name="RadarTower" parent="EnemyUnits" instance=ExtResource( 9 )]
 position = Vector2( 338, 225 )
-RotationSpeed = 0.001
+RotationSpeed = 0.01
 
 [node name="BossTank1" parent="." instance=ExtResource( 10 )]
 position = Vector2( 608, 480 )
