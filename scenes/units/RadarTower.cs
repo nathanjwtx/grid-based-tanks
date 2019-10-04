@@ -1,22 +1,21 @@
 using Godot;
 using Godot.Collections;
 using System;
-// using System.Collections.Generic;
+using System.Collections.Generic;
 
 public class RadarTower : StaticBody2D
 {
     [Signal] delegate void Target ();
     [Export] public float RotationSpeed;
 
-    private Dictionary<Player, Vector2> EnemyRange;
-
+    private List<Player> Enemies;
     private float _rotationSpeed;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _rotationSpeed = RotationSpeed;
-        EnemyRange = new Dictionary<Player, Vector2>();
+        EnemyRange = new List<Player>();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
