@@ -9,8 +9,10 @@ public class BossTank1 : EnemyMain
     private Path2D _path;
     private RayCast2D _inRange;
 
+    private Dictionary<Player, float> PlayerDistances;
     public override void _Ready()
     {
+        PlayerDistances = new Dictionary<Player, float>();
         base._collision = GetNode<RayCast2D>("Ray_Collision");
         Speed = 30;
     }
@@ -32,7 +34,7 @@ public class BossTank1 : EnemyMain
         base.targetAcquired = false;
 	}
 
-    public void _on_Target(GC.Array players)
+    public void _on_Target(GC.Dictionary players)
     {
         // if (base._target is null)
         // {
@@ -41,20 +43,28 @@ public class BossTank1 : EnemyMain
             // base._target = playerList[r.Next(0, players.Count)];
             // barrel = GetNode<Sprite>("Barrel");
         // }
-        Player closest;
+        Player newTarget = null;
         List<float> Distances = new List<float>();
-        float distance = -1.0f;
-        Dictionary<Player, float> PlayerDistances = new Dictionary<Player, float>();
-        foreach (Player p in players)
+        float distance = 0;
+        foreach (Player p in players.Keys)
         {
             float d = GetGlobalPosition().DistanceSquaredTo(p.GetGlobalPosition());
-            PlayerDistances.Add(p, d);
-            if (d > distance)
+            if (!PlayerDistances.ContainsKey(p))
             {
-                closest = p;
+                PlayerDistances.Add(p, d);
+            }
+            if (distance == 0 || d < distance)
+            {
+                if (newTarget != null)
+                {
+                    newTarget.GetNode<Sprite>("Reticle").Visible = false;
+                }
+                newTarget = p;
                 distance = d;
-                base._target = p;
+                base._target = newTarget;
+                newTarget.GetNode<Sprite>("Reticle").Visible = true;
                 barrel = GetNode<Sprite>("Barrel");
+                GD.Print($"Closest player: {newTarget.Name}");
             }
         }
         Distances.Sort();

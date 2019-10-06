@@ -8,14 +8,14 @@ public class RadarTower : StaticBody2D
     [Signal] delegate void Target ();
     [Export] public float RotationSpeed;
 
-    private GC.Array Enemies;
+    private GC.Dictionary<Player, Vector2> Enemies;
     private float _rotationSpeed;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _rotationSpeed = RotationSpeed;
-        Enemies = new GC.Array();
+        Enemies = new GC.Dictionary<Player, Vector2>();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,10 +32,20 @@ public class RadarTower : StaticBody2D
     {
         if (body is Player p)
         {
-            if (!Enemies.Contains(p))
+            if (!Enemies.ContainsKey(p))
             {
-                Enemies.Add(p);
+                Enemies.Add(p, p.GetGlobalPosition());
             }
+            else if (Enemies.ContainsKey(p) && Enemies[p] != p.GetGlobalPosition())
+            {
+                Enemies[p] = p.GetGlobalPosition();
+            }
+            // GD.Print("-----");
+            // foreach(Player x in Enemies.Keys)
+            // {
+                // GD.Print(x.Name);
+            // }
+            // GD.Print("-----");
             EmitSignal("Target", Enemies);
         }
     }
