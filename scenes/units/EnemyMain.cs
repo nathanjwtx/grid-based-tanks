@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class EnemyMain : KinematicBody2D
 {
@@ -20,6 +21,7 @@ public class EnemyMain : KinematicBody2D
     public bool targetAcquired;
     public Sprite barrel;
     public PackedScene Projectile;
+    public List<float> TargetDistance;
 
     public int TankSpeed { 
         get; 
@@ -30,6 +32,7 @@ public class EnemyMain : KinematicBody2D
     {
         base._Ready();
         TankSpeed = Speed;
+        TargetDistance = new List<float>();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -118,6 +121,11 @@ public class EnemyMain : KinematicBody2D
         {
             EmitSignal("Shoot", 100, BulletType, _target, GetGlobalPosition());
         }
+    }
+
+    public void GenerateTargetDistance(Player player)
+    {
+        
     }
 }
 
