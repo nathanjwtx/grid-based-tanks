@@ -14,7 +14,6 @@ public class Player : KinematicBody2D
         _current = new Vector2((float)(Math.Floor(this.GetPosition().x / 64)) * 64 + 32,
             (float)(Math.Floor(this.GetPosition().y / 64) * 64 + 32));
         _moves.Add(_current);
-        GetNode<Sprite>("Reticle").Visible = false;
     }
 
     public override void _Process(float delta)

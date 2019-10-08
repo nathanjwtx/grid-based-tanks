@@ -8,6 +8,7 @@ public class BossTank1 : EnemyMain
     private PathFollow2D _follow;
     private Path2D _path;
     private RayCast2D _inRange;
+    private Reticle _reticle;
 
     private Dictionary<Player, float> PlayerDistances;
     public override void _Ready()
@@ -15,6 +16,8 @@ public class BossTank1 : EnemyMain
         PlayerDistances = new Dictionary<Player, float>();
         base._collision = GetNode<RayCast2D>("Ray_Collision");
         Speed = 30;
+        _reticle = GetNode<Reticle>("Reticle");
+        _reticle.Visible = false;
     }
 
 
@@ -57,12 +60,13 @@ public class BossTank1 : EnemyMain
             {
                 if (newTarget != null)
                 {
-                    newTarget.GetNode<Sprite>("Reticle").Visible = false;
+                    _reticle.Visible = false;
                 }
                 newTarget = p;
                 distance = d;
                 base._target = newTarget;
-                newTarget.GetNode<Sprite>("Reticle").Visible = true;
+                _reticle.SetGlobalPosition(newTarget.GetGlobalPosition());
+                _reticle.Visible = true;
                 barrel = GetNode<Sprite>("Barrel");
                 GD.Print($"Closest player: {newTarget.Name}");
             }
